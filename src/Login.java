@@ -86,60 +86,14 @@ return;}
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        /*String[] usernames = new String[2];
-        String[] passwords = new String[usernames.length];
-
-        usernames[0] = "a";
-        passwords[0] = "pass";
-        usernames[1] = "b";
-        passwords[1] = "pass";
-
-
-        for (int i = 0; i < usernames.length; i++) {
-            if (usernames[i].equals(user)) {
-                if (passwords[i].length() != pass.length)
-                    loginOk = false;
-                for (int j = 0; j < passwords[i].length(); j++) {
-                    try {
-                        if (passwords[i].toCharArray()[j] != (pass[j])){
-                            loginOk = false;
-                            JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password0.");
-
-                            return;
-                        }
-                    } catch (Exception e)
-                    {
-                        JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password1.");
-                        loginOk = false;
-                        return;
-                    }
-
-                }
-            }
-            else loginOk = false;
-        }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         if (loginOk) {
             System.out.println("Hooray, you did it!");
+            new Meniu();
         }
         else {
-            JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password2.");
+            JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password.");
         }
     }
 

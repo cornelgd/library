@@ -17,6 +17,12 @@ public class users {
         buttonEdit.setBounds(100, 100, 200, 25);
         frameMeniuU.add(buttonEdit);
 
+
+        JButton buttonAdd = new JButton("Add Users");
+        buttonAdd.setBounds(100, 170, 200, 25);
+        frameMeniuU.add(buttonAdd);
+
+
         frameMeniuU.setLayout(null);
         frameMeniuU.setLocationRelativeTo(null);
 
@@ -57,6 +63,18 @@ public class users {
 
         });
 
+
+
+        buttonAdd.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                    new AddUser();
+
+            }
+
+        });
 
     }
 }

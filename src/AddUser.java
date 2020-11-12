@@ -12,7 +12,7 @@ public class AddUser {
     public AddUser() {
 
         JFrame frameAddUser = new JFrame("Add user");
-        frameAddUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameAddUser.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameAddUser.setSize(650, 350);
 
         JTextField casutaUser;
@@ -138,7 +138,28 @@ public class AddUser {
             @Override
             public void actionPerformed(ActionEvent e) {
                 validate(casutaUser.getText(), casutaPass.getPassword(),casutaPass2.getPassword(),casutaName.getText(),casutaPhone.getText(),casutaEmail.getText(),casutaAddress.getText());
-           if (addOk) {
+
+
+                Userdb checkUser = new Userdb();
+                byte[] parolaDb = new byte[0];
+                try {
+                    parolaDb = checkUser.authp(casutaUser.getText());
+                    if (parolaDb != null)
+                    {addOk = false;
+                        JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password.");
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+
+
+                }
+
+
+
+
+
+
+                if (addOk) {
                System.out.println("Bag in db");
 
 
@@ -158,7 +179,7 @@ PassEncrypt secPass = new PassEncrypt();
                } catch (InvalidKeySpecException invalidKeySpecException) {
                    invalidKeySpecException.printStackTrace();
                }
-String saltS = salt.toString();
+
 
                Userdb addUser = new Userdb();
                int id1 = 0;
@@ -168,7 +189,7 @@ String saltS = salt.toString();
                    throwables.printStackTrace();
                }
 
-               System.out.println(casutaPass.getPassword().toString()+ "  "+ salt.toString());
+             //  System.out.println(casutaPass.getPassword().toString()+ "  "+ salt.toString());
                try {
                    addUser.insert(id1, casutaUser.getText(), SecPass, salt, casutaName.getText(), Integer.parseInt(casutaPhone.getText().trim()), casutaEmail.getText(), casutaAddress.getText(), checkAdmin.isSelected());
                } catch (SQLException throwables) {
