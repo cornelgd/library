@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public class AddUser {
     boolean addOk = true;
-
+    private  byte [] salt = new byte[8];
+    private byte[]  SecPass;
     public AddUser() {
 
         JFrame frameAddUser = new JFrame("Add user");
@@ -92,7 +95,7 @@ public class AddUser {
         JTextArea casutaAddress;
         casutaAddress = new JTextArea();
         casutaAddress.setBounds(275, 205, 200, 75);
-        casutaAddress.setLineWrap(true);  //this tells it to break the string to fit the TextArea
+        casutaAddress.setLineWrap(true);
         casutaAddress.setWrapStyleWord(true);
         casutaAddress.setAlignmentY(0);
         frameAddUser.add(casutaAddress);
@@ -135,27 +138,45 @@ public class AddUser {
             @Override
             public void actionPerformed(ActionEvent e) {
                 validate(casutaUser.getText(), casutaPass.getPassword(),casutaPass2.getPassword(),casutaName.getText(),casutaPhone.getText(),casutaEmail.getText(),casutaAddress.getText());
-           if (addOk) System.out.println("Bag in db");
+           if (addOk) {
+               System.out.println("Bag in db");
 
 
+PassEncrypt secPass = new PassEncrypt();
+
+               try {
+                  salt = secPass.generateSalt();
+               } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                   noSuchAlgorithmException.printStackTrace();
+               }
 
 
+               try {
+                   SecPass = secPass.getEncryptedPassword(casutaPass.getPassword(), salt);
+               } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                   noSuchAlgorithmException.printStackTrace();
+               } catch (InvalidKeySpecException invalidKeySpecException) {
+                   invalidKeySpecException.printStackTrace();
+               }
+String saltS = salt.toString();
 
-Userdb addUser = new Userdb();
-                int id1 = 0;
-                try {
-                    id1 = addUser.lastID()+1;
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                try {
-                    addUser.insert(id1, casutaUser.getText(), casutaPass.getPassword().toString(),casutaName.getText(),Integer.parseInt(casutaPhone.getText().trim()),casutaEmail.getText(),casutaAddress.getText(),checkAdmin.isSelected());
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+               Userdb addUser = new Userdb();
+               int id1 = 0;
+               try {
+                   id1 = addUser.lastID() + 1;
+               } catch (SQLException throwables) {
+                   throwables.printStackTrace();
+               }
 
+               System.out.println(casutaPass.getPassword().toString()+ "  "+ salt.toString());
+               try {
+                   addUser.insert(id1, casutaUser.getText(), SecPass, salt, casutaName.getText(), Integer.parseInt(casutaPhone.getText().trim()), casutaEmail.getText(), casutaAddress.getText(), checkAdmin.isSelected());
+               } catch (SQLException throwables) {
+                   throwables.printStackTrace();
+               }
 
-                addOk = true; //to reset for another try
+           }
+               addOk = true; //to reset for another try
 
             }
 
@@ -192,18 +213,17 @@ if (name.length() <1 || phone.length() <1 || email.length()<1||address.length() 
             int ph = Integer.parseInt(phone.trim());
 
         }
-        catch (NumberFormatException nfe)
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Invalid phone number");
             addOk = false;
-            System.out.println("3");
 
         }
 
 
 
         if (addOk) {
-            System.out.println("Hooray, you did it!");
+
 
         } else {
             JOptionPane.showMessageDialog(null, "Invalid/missing fields");

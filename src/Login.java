@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 
 public class Login {
     public  Login() {
@@ -49,7 +52,11 @@ public class Login {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                validate(casutaUser.getText(),casutaPass.getPassword());
+                try {
+                    validate(casutaUser.getText(),casutaPass.getPassword());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
 
         });
@@ -63,11 +70,23 @@ public class Login {
     }
 
 
-
-
-    public static void validate(String user, char[] pass) {
+    public  void validate(String user, char[] pass) throws SQLException {
         boolean loginOk = true;
-        String[] usernames = new String[2];
+
+        Userdb checkUser = new Userdb();
+        byte[] parolaDb = checkUser.authp(user);
+        byte [] salt = checkUser.auths(user);
+if (parolaDb == null || salt == null){
+    JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password2.");
+return;}
+        try {
+            loginOk = PassEncrypt.authenticate(pass,parolaDb,salt);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        /*String[] usernames = new String[2];
         String[] passwords = new String[usernames.length];
 
         usernames[0] = "a";
@@ -98,7 +117,23 @@ public class Login {
                 }
             }
             else loginOk = false;
-        }
+        }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (loginOk) {
             System.out.println("Hooray, you did it!");
