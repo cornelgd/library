@@ -91,11 +91,71 @@ public class Userdb {
     }
 
 
+    public int getid(String username) throws SQLException {
+        String sql = "SELECT id FROM User  WHERE username = ?";
+
+        Connection conn = this.conecteaza();
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, username);
+        ResultSet rs = pstmt.executeQuery();
+
+        int id = rs.getInt("id");
+
+        conn.close();
+        return id ;
+
+    }
+
+    public int getisadmin(String username) throws SQLException {
+        String sql = "SELECT admin FROM User  WHERE username = ?";
+
+        Connection conn = this.conecteaza();
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, username);
+        ResultSet rs = pstmt.executeQuery();
+
+        int admin = rs.getInt("admin");
+        conn.close();
+        return admin ;
+
+    }
+
+    public String getusername(int id) throws SQLException {
+        String sql = "SELECT username FROM User  WHERE id = ?";
+
+        Connection conn = this.conecteaza();
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+
+        String uname = rs.getString("username");
+        conn.close();
+        return uname ;
+
+    }
+
+    public  void updatePass(byte[] pass,byte[] salt, int id )
+    {
+        String sql = "UPDATE User  SET pass = ?, salt = ? WHERE id = ?";
+
+        try (Connection conn = this.conecteaza();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 
+            pstmt.setBytes(1, pass);
+            pstmt.setBytes(2, salt);
+            pstmt.setInt(3, id);
 
+            pstmt.executeUpdate();
 
-
+        } catch (SQLException e) {
+            System.out.println("aici");
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 

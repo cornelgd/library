@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Meniu {
-    public  Meniu() {
+    public  Meniu(int userId, boolean isAdmin) {
 
         JFrame frameMeniu = new JFrame("Welcome");
         frameMeniu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,7 +68,7 @@ public class Meniu {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new users();
+                new users(userId, isAdmin);
 
 
             }

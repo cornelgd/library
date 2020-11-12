@@ -6,6 +6,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public class Login {
+    public int userId;
+    public boolean isAdmin = false;
     public  Login() {
 
         JFrame frameLogin = new JFrame("Login");
@@ -76,21 +78,29 @@ public class Login {
         Userdb checkUser = new Userdb();
         byte[] parolaDb = checkUser.authp(user);
         byte [] salt = checkUser.auths(user);
+
 if (parolaDb == null || salt == null){
     JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password2.");
 return;}
         try {
             loginOk = PassEncrypt.authenticate(pass,parolaDb,salt);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
         if (loginOk) {
-            System.out.println("Hooray, you did it!");
-            new Meniu();
+            userId = checkUser.getid(user);
+            int isAdminInt = checkUser.getisadmin(user);
+            System.out.println(isAdminInt+ user + userId);
+
+
+            if (isAdminInt == 1) isAdmin = true;
+                    else isAdmin = false;
+
+            //System.out.println("Hooray, you did it!");
+            new Meniu(userId, isAdmin);
+
         }
         else {
             JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password.");

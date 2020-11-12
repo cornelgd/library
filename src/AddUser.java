@@ -163,7 +163,7 @@ public class AddUser {
                System.out.println("Bag in db");
 
 
-PassEncrypt secPass = new PassEncrypt();
+                PassEncrypt secPass = new PassEncrypt();
 
                try {
                   salt = secPass.generateSalt();
