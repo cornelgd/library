@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Userdb {
     public int lastID;
@@ -137,6 +139,45 @@ public class Userdb {
 
     }
 
+    public List<userDataComplete> userDetailsList = new ArrayList<>();
+    public List<userDataComplete> readUserDetails(int id) throws SQLException {
+        String sql = "SELECT id, username, pass, salt, name,phone, email,address, admin FROM User  WHERE id = ?";
+
+        Connection conn = this.conecteaza();
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, id);
+
+
+        ResultSet rs = pstmt.executeQuery();
+
+        userDetailsList.add(new userDataComplete(
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getBytes("pass"),
+                rs.getBytes("salt"),
+                rs.getString("name"),
+                rs.getInt("phone"),
+                rs.getString("email"),
+                rs.getString("address"),
+                rs.getBoolean("admin")
+                )      );
+
+        conn.close();
+        return userDetailsList ;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     public  void updatePass(byte[] pass,byte[] salt, int id )
     {
         String sql = "UPDATE User  SET pass = ?, salt = ? WHERE id = ?";
@@ -158,8 +199,30 @@ public class Userdb {
     }
 
 
+    public List<userData> userList = new ArrayList<>();
+
+    public List<userData> getuserList() throws SQLException {
+        String sql = "SELECT id, username FROM User ";
+
+        Connection conn = this.conecteaza();
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+      //  pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+        do {
+
+            userList.add(new userData(
+                    rs.getInt("id"),
+                    rs.getString("username"))
+
+            );
+        } while (rs.next());
 
 
+        conn.close();
+        return userList ;
+
+    }
 
 
 

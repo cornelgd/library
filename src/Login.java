@@ -92,7 +92,7 @@ return;}
         if (loginOk) {
             userId = checkUser.getid(user);
             int isAdminInt = checkUser.getisadmin(user);
-            System.out.println(isAdminInt+ user + userId);
+          //  System.out.println(isAdminInt+ user + userId);
 
 
             if (isAdminInt == 1) isAdmin = true;

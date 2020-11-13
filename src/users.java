@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class users {
     public users(int userId, boolean isAdmin) {
@@ -21,11 +22,11 @@ if (isAdmin) {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-               /* try {
-                    new student();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }*/
+            try {
+                new EditUser();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
 
     });
