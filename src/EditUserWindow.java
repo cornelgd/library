@@ -154,24 +154,6 @@ casutaName.setText(u.get(0).name);
                 validate(casutaUser.getText(), casutaPass.getPassword(),casutaPass2.getPassword(),casutaName.getText(),casutaPhone.getText(),casutaEmail.getText(),casutaAddress.getText());
 
 
-                Userdb checkUser = new Userdb();
-                byte[] parolaDb = new byte[0];
-                try {
-                    parolaDb = checkUser.authp(casutaUser.getText());
-                    if (parolaDb != null)
-                    {
-                        editOk = false;
-                        JOptionPane.showMessageDialog(null, "Incorrect Username\nand/or Password.");
-                    }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-
-
-                }
-
-
-
-
 
 
                 if (editOk) {
@@ -197,19 +179,9 @@ casutaName.setText(u.get(0).name);
 
 
                     Userdb editUser = new Userdb();
-                    int id1 = 0;
-                    try {
-                        id1 = editUser.lastID() + 1;
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
 
                     //  System.out.println(casutaPass.getPassword().toString()+ "  "+ salt.toString());
-                    try {
-                        editUser.insert(id1, casutaUser.getText(), SecPass, salt, casutaName.getText(), Integer.parseInt(casutaPhone.getText().trim()), casutaEmail.getText(), casutaAddress.getText(), checkAdmin.isSelected());
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    editUser.update(id, casutaUser.getText(), SecPass, salt, casutaName.getText(), Integer.parseInt(casutaPhone.getText().trim()), casutaEmail.getText(), casutaAddress.getText(), checkAdmin.isSelected());
 
                 }
                 editOk = true; //to reset for another try

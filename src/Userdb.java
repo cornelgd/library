@@ -193,11 +193,40 @@ public class Userdb {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("aici");
+         //   System.out.println("aici");
             System.out.println(e.getMessage());
         }
     }
 
+    public  void update(int id, String username, byte[] pass,byte[] salt, String name,int phone, String email,String address, boolean admin )
+    {
+        String sql = "UPDATE User  SET pass = ?, salt = ? , name = ?, phone = ?, email = ?, address = ?, admin = ?  WHERE id = ?";
+
+        try (Connection conn = this.conecteaza();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+
+            pstmt.setBytes(1, pass);
+            pstmt.setBytes(2, salt);
+            pstmt.setString(3, name);
+            pstmt.setInt(4, phone);
+            pstmt.setString(5, email);
+            pstmt.setString(6, address);
+            pstmt.setBoolean(7, admin);
+            pstmt.setInt(8, id);
+
+
+
+
+
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("aici");
+            System.out.println(e.getMessage());
+        }
+    }
 
     public List<userData> userList = new ArrayList<>();
 
