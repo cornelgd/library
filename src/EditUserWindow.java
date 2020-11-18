@@ -134,7 +134,7 @@ public class EditUserWindow {
         frameAddUser.setVisible(true);
 
 Userdb readEdit = new Userdb();
-        List<userDataComplete> u = readEdit.readUserDetails(id);
+        List<studBooks> u = readEdit.readUserDetails(id);
 casutaName.setText(u.get(0).name);
         casutaUser.setText(u.get(0).username);
         casutaPhone.setText(Integer.toString(u.get(0).phone));

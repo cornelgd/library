@@ -1,4 +1,4 @@
-public class userDataComplete {
+public class studBooks {
 
     public int id;
     public String username, name, email, address;
@@ -7,7 +7,7 @@ public class userDataComplete {
 public byte[] pass, salt;
 
 
-    public userDataComplete(int id,String username,  byte[] pass,   byte[] salt, String name, int phone, String email, String address, boolean admin ){
+    public studBooks(int id, String username, byte[] pass, byte[] salt, String name, int phone, String email, String address, boolean admin ){
         this.id = id ;
         this.username = username  ;
         this.pass = pass ;

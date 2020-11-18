@@ -36,11 +36,9 @@ public class Meniu {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               /* try {
-                    new student();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }*/
+
+                    new Student();
+
             }
 
         });
@@ -51,11 +49,9 @@ public class Meniu {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                /*try {
-                    new books();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }*/
+
+                    new Books();
+
 
 
             }

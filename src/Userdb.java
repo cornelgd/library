@@ -139,8 +139,8 @@ public class Userdb {
 
     }
 
-    public List<userDataComplete> userDetailsList = new ArrayList<>();
-    public List<userDataComplete> readUserDetails(int id) throws SQLException {
+    public List<studBooks> userDetailsList = new ArrayList<>();
+    public List<studBooks> readUserDetails(int id) throws SQLException {
         String sql = "SELECT id, username, pass, salt, name,phone, email,address, admin FROM User  WHERE id = ?";
 
         Connection conn = this.conecteaza();
@@ -151,7 +151,7 @@ public class Userdb {
 
         ResultSet rs = pstmt.executeQuery();
 
-        userDetailsList.add(new userDataComplete(
+        userDetailsList.add(new studBooks(
                 rs.getInt("id"),
                 rs.getString("username"),
                 rs.getBytes("pass"),
