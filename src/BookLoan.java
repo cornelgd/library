@@ -131,6 +131,7 @@ public class BookLoan {
 
         }
         ArrayList<Integer> idList= new ArrayList<Integer>();
+        ArrayList<Integer> idRemove= new ArrayList<Integer>();
 
         Studentdb readStB = new Studentdb();
 
@@ -143,27 +144,44 @@ public class BookLoan {
                   modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data1});
            }
 
-        idList.add(studBooksList1.get(0).bookid1);}
+        idList.add(studBooksList1.get(0).bookid1);
+       System.out.println(studBooksList1.get(0).bookid1+" 1");}
+
+
         if (studBooksList1.get(0).bookid2 > 0){
             for (int i = 1; i<readBooks.bookList.size(); i++ ){
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid2)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author,studBooksList1.get(0).data2});
-            }        idList.add(studBooksList1.get(0).bookid2);}
+            }
+            System.out.println(studBooksList1.get(0).bookid2+" 2");
+            idList.add(studBooksList1.get(0).bookid2);}
+
+
         if (studBooksList1.get(0).bookid3 > 0){
             for (int i = 1; i<readBooks.bookList.size(); i++ ){
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid3)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data3});
-            }        idList.add(studBooksList1.get(0).bookid3);}
+            }
+            System.out.println(studBooksList1.get(0).bookid3);
+            idList.add(studBooksList1.get(0).bookid3);}
+
+
         if (studBooksList1.get(0).bookid4 > 0){
             for (int i = 1; i<readBooks.bookList.size(); i++ ){
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid4)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data4});
-            }        idList.add(studBooksList1.get(0).bookid4);}
+            }
+            System.out.println(studBooksList1.get(0).bookid4);
+            idList.add(studBooksList1.get(0).bookid4);}
+
+
         if (studBooksList1.get(0).bookid5 > 0){
             for (int i = 1; i<readBooks.bookList.size(); i++ ){
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid5)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data5});
-            }        idList.add(studBooksList1.get(0).bookid5);}
+            }
+            System.out.println(studBooksList1.get(0).bookid5);
+            idList.add(studBooksList1.get(0).bookid5);}
 
 
 
@@ -226,7 +244,9 @@ public class BookLoan {
 
                     model.addRow(new Object[]{loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 0).toString(), loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 1).toString(),loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 2).toString()});
 
+                    idRemove.add((Integer) loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 0));
                     modelL.removeRow(selRowS);
+
 idList.remove(selRowS);
 
 
@@ -302,8 +322,13 @@ int  bid1, bid2,bid3,bid4,bid5;
 
 
                 }
-                //daca scot din dreapta nu mai am ce id sa sterg...
-              //  for (int i = idList.size(); i<5; i++)   loanB.updateB(null, null, 0);
+                for (int i=0; i<idRemove.size(); i++) {
+
+                    loanB.updateB(null, null, idRemove.get(i));
+
+
+
+                }
 
 
                 try { date1 = (String) modelL.getValueAt(0,3);
