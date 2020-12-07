@@ -75,7 +75,7 @@ public class SelUser {
             modelS.addRow(new Object[]{readUsers.userList.get(i).username});
 
         }
-        System.out.println("din seluser "+  selectedUserIdS);
+       // System.out.println("din seluser "+  selectedUserIdS);
 
         tableStud.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -139,7 +139,7 @@ frame.dispose();
             }
 
         });
-        System.out.println("din seluser "+  selectedUserIdS);
+      //  System.out.println("din seluser "+  selectedUserIdS);
     }
 }
 

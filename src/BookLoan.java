@@ -146,7 +146,8 @@ public class BookLoan {
            }
 
         idList.add(studBooksList1.get(0).bookid1);
-       System.out.println(studBooksList1.get(0).bookid1+" 1");}
+      // System.out.println(studBooksList1.get(0).bookid1+" 1");
+           }
 
 
         if (studBooksList1.get(0).bookid2 > 0){
@@ -154,7 +155,7 @@ public class BookLoan {
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid2)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author,studBooksList1.get(0).data2});
             }
-            System.out.println(studBooksList1.get(0).bookid2+" 2");
+          //  System.out.println(studBooksList1.get(0).bookid2+" 2");
             idList.add(studBooksList1.get(0).bookid2);}
 
 
@@ -163,7 +164,7 @@ public class BookLoan {
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid3)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data3});
             }
-            System.out.println(studBooksList1.get(0).bookid3);
+           // System.out.println(studBooksList1.get(0).bookid3);
             idList.add(studBooksList1.get(0).bookid3);}
 
 
@@ -172,7 +173,7 @@ public class BookLoan {
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid4)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data4});
             }
-            System.out.println(studBooksList1.get(0).bookid4);
+           // System.out.println(studBooksList1.get(0).bookid4);
             idList.add(studBooksList1.get(0).bookid4);}
 
 
@@ -181,12 +182,10 @@ public class BookLoan {
                 if (readBooks.bookList.get(i).id == studBooksList1.get(0).bookid5)
                     modelL.addRow(new Object[]{readBooks.bookList.get(i).id,readBooks.bookList.get(i).name, readBooks.bookList.get(i).author, studBooksList1.get(0).data5});
             }
-            System.out.println(studBooksList1.get(0).bookid5);
+         //   System.out.println(studBooksList1.get(0).bookid5);
             idList.add(studBooksList1.get(0).bookid5);}
 
 
-
-      //  System.out.println("dddd1 "+selectedBookDate);
 
 
 
@@ -329,7 +328,7 @@ int  bid1, bid2,bid3,bid4,bid5;
 
 
                 for (int i=0; i<idList.size(); i++) {
-                    System.out.println(i+" "+modelL.getValueAt(i,3));
+                  //  System.out.println(i+" "+modelL.getValueAt(i,3));
 
 
                      loanB.updateB(studName, (String) modelL.getValueAt(i,3), idList.get(i));
