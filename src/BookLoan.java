@@ -64,6 +64,7 @@ public class BookLoan {
         JTable tableBooks = new JTable(model);
         JScrollPane scrollBooks = new JScrollPane(tableBooks);
         tableBooks.getColumnModel().getColumn(0).setPreferredWidth(50);
+
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableBooks.getModel());
 
         JTable loanedBooks = new JTable(modelL);
@@ -208,15 +209,22 @@ public class BookLoan {
 
                     }
                    if (modelL.getRowCount() < 5) {
-
+                       rowSorter.allRowsChanged();
                        if (selectedBookDate == null || selectedBookDate.equals("")) {
                            modelL.addRow(new Object[]{selectedBookId,selectedBook,  tableBooks.getValueAt(tableBooks.rowAtPoint(evt.getPoint()), 2).toString(), dataAzi});
                        }
                        else {
                            modelL.addRow(new Object[]{selectedBookId,selectedBook, tableBooks.getValueAt(tableBooks.rowAtPoint(evt.getPoint()), 2).toString(), selectedBookDate});
                        }
-                       model.removeRow(selRow);
-                      // for(int fruit:idList) System.out.println(fruit);
+
+
+
+                       int Index = tableBooks.convertRowIndexToModel(selRow);
+                       model.removeRow(Index);
+
+
+
+
 
 
                    }
@@ -239,13 +247,19 @@ public class BookLoan {
                 loanedBooks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 if (evt1.getClickCount() > 1) {
                     int selRowS = loanedBooks.rowAtPoint(evt1.getPoint());
-
+                    rowSorter.allRowsChanged();
 
 
                     model.addRow(new Object[]{loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 0).toString(), loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 1).toString(),loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 2).toString()});
 
                     idRemove.add((Integer) loanedBooks.getValueAt(loanedBooks.rowAtPoint(evt1.getPoint()), 0));
-                    modelL.removeRow(selRowS);
+
+                    int Index = loanedBooks.convertRowIndexToModel(selRowS);
+                    modelL.removeRow(Index);
+
+
+
+
 
 idList.remove(selRowS);
 
